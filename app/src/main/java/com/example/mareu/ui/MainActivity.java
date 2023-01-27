@@ -1,4 +1,4 @@
-package com.example.mareu;
+package com.example.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,14 +12,15 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    private void initUI() {
         // obligatoire pour le view binding
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        afficheToast();
+    }
 
+    private void afficheToast() {
         // test du view binding, afficher dans un toast un texte ecrie par l'utilisateur
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,4 +30,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initUI();
+    }
+
 }
