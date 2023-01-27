@@ -13,7 +13,7 @@ public abstract class DummyReunionGenerator {
     }
 
     public static List<Reunion> DUMMY_REUNION = Arrays.asList(
-            new Reunion(0, "Salle 01", "24/01/2023", "10h30", "12h00", "Sujet 01", Arrays.asList("participant1@monadresse.fr", "participant2@monadresse.fr", "participant3@monadresse.fr"))
+            new Reunion(0, "Salle A", "24/01/2023", "10h30", "12h00", "Sujet 01", Arrays.asList("participant1@monadresse.fr", "participant2@monadresse.fr", "participant3@monadresse.fr"))
             );
 
 }
