@@ -14,6 +14,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+// pour la view Binding
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -33,7 +38,26 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    // OC_3 problème de compatibilité (2,3,4)
+    // implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // implementation 'com.android.support:design:28.0.0'
+    // implementation 'com.android.support:support-v4:28.0.0'
+    // implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    // implementation 'com.jakewharton:butterknife:9.0.0'
+    // annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0'
+
+    // implementation 'com.github.bumptech.glide:glide:4.9.0'
+    // annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
+
+    // UNIT TEST
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.hamcrest:java-hamcrest:2.0.0.0' // OC_3
+
+    // INSTRUMENTATION TEST
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    //androidTestImplementation 'com.android.support.test:rules:1.0.2' // OC_3
+    // androidTestImplementation 'com.android.support.test:runner:1.0.2' // OC_3
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2' // OC_3
 }
