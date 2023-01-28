@@ -1,5 +1,6 @@
 package com.example.mareu.model;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,9 +15,6 @@ public class Reunion {
     /** Salle de reunion */
     private String reunionSalle;
 
-    /** Jour de la reunion */
-    private String reunionDate;
-
     /** L heure de debut de la reunion */
     private String reunionDebut;
 
@@ -29,25 +27,28 @@ public class Reunion {
     /** Participant a la reunion */
     private List<String> reunionParticipants;
 
+    /** Jour de la reunion */
+    private Date mReunionDate;
+
     /**
      * Constructeur
      * @param id
      * @param reunionSalle
-     * @param reunionDate
      * @param reunionDebut
      * @param reunionFin
      * @param reunionSujet
      * @param reunionParticipants
+     * @param mReunionDate
      */
 
-    public Reunion(Integer id, String reunionSalle, String reunionDate, String reunionDebut, String reunionFin, String reunionSujet, List<String> reunionParticipants) {
+    public Reunion(Integer id, String reunionSalle, String reunionDebut, String reunionFin, String reunionSujet, List<String> reunionParticipants, Date Date) {
         this.id = id;
         this.reunionSalle = reunionSalle;
-        this.reunionDate = reunionDate;
         this.reunionDebut = reunionDebut;
         this.reunionFin = reunionFin;
         this.reunionSujet = reunionSujet;
         this.reunionParticipants = reunionParticipants;
+        this.mReunionDate = new Date();
     }
 
     public Integer getId() {
@@ -66,12 +67,12 @@ public class Reunion {
         this.reunionSalle = reunionSalle;
     }
 
-    public String getReunionDate() {
-        return reunionDate;
+    public Date getReunionDate() {
+        return mReunionDate;
     }
 
-    public void setReunionDate(String reunionDate) {
-        this.reunionDate = reunionDate;
+    public void setReunionDate(Date reunionDate) {
+        mReunionDate = reunionDate;
     }
 
     public String getReunionDebut() {
