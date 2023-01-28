@@ -24,7 +24,7 @@ public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHold
 
     @NonNull
     @Override
-    public ReunionAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_reunion, parent, false);
 
