@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ActivityMainBinding binding;
-    private ArrayList<Reunion> mReunionArrayList;
+    private ArrayList<Reunion> mReunionArrayList = new ArrayList<>();
     private ReunionApiService mReunionApiService = Injection.getReunionApiService();
 
 
@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        initData();
-        //initRecyclerView();
+        initRecyclerView();
         setButton();
     }
 
@@ -44,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mReunionArrayList new ArrayList<>(mReunionApiService.getReunion());
     }
 
+    // je ne comprends pas pourquoi mettre ça s'il faut rajouter un OnClick
     private void setButton() {
         binding.addReunion.setOnClickListener(this);
     }
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initData();
         initUI();
     }
 
