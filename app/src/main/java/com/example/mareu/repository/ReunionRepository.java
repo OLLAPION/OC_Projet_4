@@ -3,6 +3,7 @@ package com.example.mareu.repository;
 import com.example.mareu.model.Reunion;
 import com.example.mareu.service.ReunionApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReunionRepository {

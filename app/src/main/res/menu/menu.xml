@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filter_date"
+        android:title="Filtrer par date"
+        app:showAsAction="never" />
+    <item android:id="@+id/filter_salle"
+        android:title="Filtrer par salle"
+        app:showAsAction="never"/>
+    <item android:id="@+id/filter_reset"
+        android:title="Reset le filtre"
+        app:showAsAction="never"/>
+</menu>

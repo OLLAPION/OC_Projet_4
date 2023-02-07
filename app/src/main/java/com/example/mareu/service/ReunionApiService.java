@@ -2,6 +2,8 @@ package com.example.mareu.service;
 
 import com.example.mareu.model.Reunion;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,4 +28,9 @@ public interface ReunionApiService {
      * @param reunion
      */
     void deleteReunion(Reunion reunion);
+
+
+    ArrayList<Reunion> getReunionsFilteredByDate(Date date);
+
+    ArrayList<Reunion> getReunionsFilteredByRoom(String participant);
 }

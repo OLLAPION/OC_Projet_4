@@ -2,6 +2,9 @@ package com.example.mareu.service;
 
 import com.example.mareu.model.Reunion;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,5 +38,28 @@ public class DummyReunionApiService implements ReunionApiService{
     public void deleteReunion(Reunion reunion) {
         this.reunion.remove(reunion);
     }
+
+    @Override
+    public ArrayList<Reunion> getReunionsFilteredByDate(Date date) {
+        ArrayList<Reunion> result = new ArrayList<>();
+
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(date);
+        for (int i = 0; i < reunion.size(); i++) {
+            Calendar cal2 = Calendar.getInstance();
+            cal2.setTime(reunion.get(i).getReunionDate());
+            boolean sameDay = cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                    cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+            if (sameDay) result.add(reunion.get(i));
+
+        }
+        return result;
+    }
+
+    @Override
+    public ArrayList<Reunion> getReunionsFilteredByRoom(String participant) {
+        return null;
+    }
+
 
 }

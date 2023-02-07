@@ -30,26 +30,17 @@ public class Reunion {
     /** Jour de la reunion */
     private Date mReunionDate;
 
-    /**
-     * Constructeur
-     * @param id
-     * @param reunionSalle
-     * @param reunionDebut
-     * @param reunionFin
-     * @param reunionSujet
-     * @param reunionParticipants
-     * @param mReunionDate
-     */
 
-    public Reunion(Integer id, String reunionSalle, String reunionDebut, String reunionFin, String reunionSujet, List<String> reunionParticipants, Date Date) {
-        this.id = id;
+
+    public Reunion(String reunionSalle, String reunionDebut, String reunionFin, String reunionSujet, List<String> reunionParticipants, Date date) {
         this.reunionSalle = reunionSalle;
         this.reunionDebut = reunionDebut;
         this.reunionFin = reunionFin;
         this.reunionSujet = reunionSujet;
         this.reunionParticipants = reunionParticipants;
-        this.mReunionDate = new Date();
+        this.mReunionDate = date;
     }
+
 
     public Integer getId() {
         return id;
@@ -99,12 +90,33 @@ public class Reunion {
         this.reunionSujet = reunionSujet;
     }
 
-    public List<String> getReunionParticipants() {
+    public List<String> getReunionParticipants(String participant) {
         return reunionParticipants;
     }
 
     public void setReunionParticipants(List<String> reunionParticipants) {
         this.reunionParticipants = reunionParticipants;
+    }
+
+    /**
+     * Constructeur
+     * @param id
+     * @param reunionSalle
+     * @param reunionDebut
+     * @param reunionFin
+     * @param reunionSujet
+     * @param reunionParticipants
+     * @param date
+     */
+
+    public Reunion(Integer id, String reunionSalle, String reunionDebut, String reunionFin, String reunionSujet, List<String> reunionParticipants, Date date) {
+        this.id = id;
+        this.reunionSalle = reunionSalle;
+        this.reunionDebut = reunionDebut;
+        this.reunionFin = reunionFin;
+        this.reunionSujet = reunionSujet;
+        this.reunionParticipants = reunionParticipants;
+        this.mReunionDate = date;
     }
 
 }
