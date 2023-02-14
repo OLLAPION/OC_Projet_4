@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityAddReunionBinding;
 import com.example.mareu.di.Injection;
 import com.example.mareu.model.Reunion;
@@ -20,8 +23,6 @@ import java.util.List;
 public class AddReunionActivity extends AppCompatActivity implements  View.OnClickListener {
 
     ActivityAddReunionBinding binding;
-    
-
     private ReunionApiService mReunionApiService = Injection.getReunionApiService();
 
     private void initUI() {
@@ -46,7 +47,7 @@ public class AddReunionActivity extends AppCompatActivity implements  View.OnCli
             }
         }
     }
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +55,10 @@ public class AddReunionActivity extends AppCompatActivity implements  View.OnCli
         initUI();
     }
 
-
-
     private void onSubmit() throws ParseException {
         SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
         List<String> listParticipants = new ArrayList<>();
-        
+
         String lieu = binding.recuperationLieu.getText().toString();
         String jour = binding.recuperationJour.getText().toString();
         String heureDebut = binding.recuperationHeureDebut.getText().toString();
@@ -67,16 +66,34 @@ public class AddReunionActivity extends AppCompatActivity implements  View.OnCli
         String sujet = binding.recuperationSujet.getText().toString();
         String date = binding.recuperationJour.getText().toString();
         Date dateAuFormat = fmtOut.parse(date);
-        String participant = binding.recuperationParticipants.getText().toString();
+        String participant = binding.recuperationParticipants.getText().toString().trim();
         listParticipants.add(participant);
-        // actuellement l'appli crash après avoir ajouté la reunion
-        // dans reunion :
+
+        Spinner choixSalle = binding.choixSalle;
         /*
-        public List<String> getReunionParticipants(String participant) {
-            return reunionParticipants;
+        List<String> liste = new ArrayList<>();
+        liste.add("Salle_01");
+        liste.add("Salle_02");
+        liste.add("Salle_03");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, liste);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        choixSalle.setAdapter(adapter);
+
          */
 
-        // layout : texteinputlayout
+        /*
+        String[] salles = {"Salle_01", "Salle_02", "Salle_03", "Salle_04", "Salle_05", "Salle_06", "Salle_07", "Salle_08", "Salle_09", "Salle_10"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, salles);
+        choixSalle.setAdapter(adapter);
+         */
+
+        Spinner spin = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter <CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.item_array,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapter);
+
+
+
         if (lieu.isEmpty()) {
             binding.recuperationLieu.setError("Choisissez une Salle");
             return;
@@ -97,17 +114,14 @@ public class AddReunionActivity extends AppCompatActivity implements  View.OnCli
             binding.recuperationSujet.setError("Choisissez un sujet");
             return;
         }
-
         if (date.isEmpty()) {
             binding.recuperationJour.setError("Choisissez un jour");
             return;
         }
-
         if (participant.isEmpty()) {
             binding.recuperationParticipants.setError("Ajoutez au moins deux participants");
             return;
         }
-        
 
         mReunionApiService.addReunion(new Reunion(lieu, heureDebut, heureFin, sujet, listParticipants, dateAuFormat));
         Toast.makeText(this, "Reunion reservé !", Toast.LENGTH_SHORT).show();

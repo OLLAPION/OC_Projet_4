@@ -57,8 +57,14 @@ public class DummyReunionApiService implements ReunionApiService{
     }
 
     @Override
-    public ArrayList<Reunion> getReunionsFilteredByRoom(String participant) {
-        return null;
+    public List<Reunion> getReunionsFilteredBySalle(String salle) {
+        List<Reunion> filteredReunions = new ArrayList<>();
+        for (Reunion reunion : reunion) {
+            if (reunion.getReunionSalle().equals(salle)) {
+                filteredReunions.add(reunion);
+            }
+        }
+        return filteredReunions;
     }
 
 

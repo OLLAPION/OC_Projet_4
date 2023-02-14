@@ -5,7 +5,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,13 +59,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 layoutManager.getOrientation());
         binding.recyclerview.addItemDecoration(dividerItemDecoration);
         */
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Associe le menu.xml à la main
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
@@ -93,18 +92,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void salleDialog() {
-        salleList.add("Salle_01");
-        salleList.add("Salle_02");
-        salleList.add("Salle_03");
-        salleList.add("Salle_04");
-        salleList.add("Salle_05");
-        salleList.add("Salle_06");
-        salleList.add("Salle_07");
-        salleList.add("Salle_08");
-        salleList.add("Salle_09");
-        salleList.add("Salle_10");
-        //salleList.show;
+
+        /*
+        // Récupérer la liste des salles disponibles
+        // j'arrive pas à recuperer la salle de ma fausse bdd
+        List<String> salles = Injection.getNewInstanceApiService().getReunionSalle();
+
+        // Créer un tableau de chaînes à partir de la liste des salles
+        String[] sallesArray = salles.toArray(new String[0]);
+
+        // Créer la boîte de dialogue
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sélectionner une salle");
+        builder.setItems(sallesArray, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Récupérer la salle sélectionnée
+                String salleSelectionnee = salles.get(which);
+
+                // Appliquer le filtre par salle
+                List<Reunion> reunionsFiltrees = Injection.getReunionApiService().getReunionsFilteredBySalle(salleSelectionnee);
+                // recuperer la liste avec l'update effectué
+                ReunionAdapter.updateList(reunionsFiltrees);
+            }
+        });
+        builder.show();
+        */
+
     }
+
 
     private void dateDialog() {
         int selectedYear = 2023;
@@ -130,8 +146,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 // Create DatePickerDialog (Spinner Mode):
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth);
-
-
 
 // Show
         datePickerDialog.show();

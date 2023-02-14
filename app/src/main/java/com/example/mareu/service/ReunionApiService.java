@@ -32,5 +32,5 @@ public interface ReunionApiService {
 
     ArrayList<Reunion> getReunionsFilteredByDate(Date date);
 
-    ArrayList<Reunion> getReunionsFilteredByRoom(String participant);
+    List<Reunion> getReunionsFilteredBySalle(String participant);
 }

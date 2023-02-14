@@ -19,7 +19,9 @@ public class Injection {
         return new ReunionRepository(new DummyReunionApiService());
     }
 
-    private static final ReunionApiService service = new DummyReunionApiService();
+    // separation entre l'apiService et le repository
+
+    private static ReunionApiService service = new DummyReunionApiService();
 
     /**
      * Get an instance on @{@link ReunionApiService}

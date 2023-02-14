@@ -1,66 +1,53 @@
 package com.example.mareu.ui;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.example.mareu.R;
-import com.example.mareu.databinding.ActivityAddReunionBinding;
-import com.example.mareu.databinding.ActivityMainBinding;
 import com.example.mareu.databinding.ItemReunionBinding;
 import com.example.mareu.di.Injection;
-import com.example.mareu.events.DeleteReunionEvent;
 import com.example.mareu.model.Reunion;
 import com.example.mareu.repository.ReunionRepository;
 import com.example.mareu.service.ReunionApiService;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHolder> {
 
+    // changer "reunions" pour "mReunions" ...
     private List<Reunion> reunions;
 
     public ReunionAdapter(List<Reunion> reunionArrayList) {
-        reunions = reunionArrayList;
+        this.reunions = reunionArrayList;
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_reunion, parent, false);
-
-        return new ViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ItemReunionBinding binding = ItemReunionBinding.inflate(layoutInflater, parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Reunion reunion = reunions.get(position);
         holder.displayReunion(reunion);
 
-        holder.mImageView.setImageResource(getGoodPhoto(reunion.getReunionSalle()));
-
-        // Suppression d'une reunion
-        /*
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+        holder.binding.photo.setImageResource(getGoodPhoto(reunion.getReunionSalle()));
+        holder.binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                deleteReunion(holder.getBindingAdapterPosition());
             }
         });
-        */
+
     }
 
     private int getGoodPhoto(String salleReunion) {
@@ -95,38 +82,48 @@ public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHold
         return reunions.size();
     }
 
+    public void deleteReunion(int position) {
+        reunions.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, reunions.size());
+    }
+
+    public void updateList(List<Reunion> reunions) {
+        this.reunions.clear();
+        this.reunions.addAll(reunions);
+        notifyDataSetChanged();
+    }
+
     /**
      * ViewHolder dans l'adapter
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView lieu;
-        public final TextView heureCommencement;
-        public final TextView sujet;
-        public final TextView participants;
-        public final TextView date;
-        public final ImageView deleteButton;
-        ImageView mImageView;
+        private ItemReunionBinding binding;
 
-        public ViewHolder(View view) {
-            super(view);
-            lieu = view.findViewById(R.id.lieu);
-            heureCommencement = view.findViewById(R.id.heureCommencement);
-            sujet = view.findViewById(R.id.sujet);
-            participants = view.findViewById(R.id.participant);
-            date = view.findViewById(R.id.date);
-            deleteButton = itemView.findViewById(R.id.button);
-            mImageView = itemView.findViewById(R.id.photo);
+        public ViewHolder(ItemReunionBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         public void displayReunion(Reunion reunion) {
             SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
 
-            lieu.setText(reunion.getReunionSalle());
-            heureCommencement.setText("-" + reunion.getReunionDebut() + "-");
-            sujet.setText(reunion.getReunionSujet());
-            //participants.setText(reunion.getReunionParticipants().get(0) + " ; " + reunion.getReunionParticipants().get(1));
-            date.setText(fmtOut.format(reunion.getReunionDate()));
+            binding.lieu.setText(reunion.getReunionSalle());
+            binding.heureCommencement.setText("-" + reunion.getReunionDebut() + "-");
+            binding.sujet.setText(reunion.getReunionSujet());
+            binding.date.setText(fmtOut.format(reunion.getReunionDate()));
+
+            List<String> reunionParticipants = reunion.getReunionParticipants();
+            StringBuilder builder = new StringBuilder();
+            for (String participant : reunionParticipants) {
+                builder.append(participant);
+                builder.append(", ");
+            }
+            String participants = builder.toString().trim();
+            if (participants.endsWith(",")) {
+                participants = participants.substring(0, participants.length() - 1);
+            }
+            binding.participant.setText(participants);
         }
     }
-
 }

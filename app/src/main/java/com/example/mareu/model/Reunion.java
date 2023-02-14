@@ -90,7 +90,7 @@ public class Reunion {
         this.reunionSujet = reunionSujet;
     }
 
-    public List<String> getReunionParticipants(String participant) {
+    public List<String> getReunionParticipants() {
         return reunionParticipants;
     }
 

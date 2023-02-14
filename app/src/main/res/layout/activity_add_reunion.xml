@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.AddReunionActivity">
 
+    <Spinner
+        android:id="@+id/choixSalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+    android:layout_height="30dp"
+    android:layout_marginBottom="30dp"
+    android:id="@+id/spinner"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true"
+        app:layout_constraintStart_toStartOf="@id/choixSalle"
+        app:layout_constraintTop_toTopOf="@id/choixSalle"/>
+
     <TextView
         android:id="@+id/textLieu"
         android:layout_width="wrap_content"
@@ -15,8 +32,8 @@
         android:textStyle="bold"
         android:textSize="20dp"
         android:text="Choix de la salle : "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/choixSalle"
+        app:layout_constraintTop_toTopOf="@id/choixSalle"
         tools:text="Choix de la salle: " />
 
     <EditText
@@ -145,5 +162,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recuperationParticipants" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
