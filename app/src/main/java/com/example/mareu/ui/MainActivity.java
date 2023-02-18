@@ -15,7 +15,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 
 import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityMainBinding;
@@ -25,6 +28,7 @@ import com.example.mareu.repository.ReunionRepository;
 import com.example.mareu.service.ReunionApiService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -93,6 +97,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void salleDialog() {
 
+            // Créer un Spinner pour la sélection de la salle
+            Spinner spinner = new Spinner(this);
+
+            // Créer une liste de salles
+            List<String> salles = Arrays.asList("Salle_01", "Salle_02", "Salle_03", "Salle_04", "Salle_05", "Salle_06", "Salle_07", "Salle_08", "Salle_09", "Salle_10");
+
+            // Créer un adaptateur pour le Spinner
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, salles);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            // Ajouter un écouteur d'événements sur le Spinner
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    // Récupérer la salle sélectionnée
+                    String salleSelectionnee = (String) parent.getItemAtPosition(position);
+
+                    // Filtrer la liste des réunions par salle
+                    List<Reunion> reunionsFiltrees = mReunionApiService.getReunionsFilteredBySalle(salleSelectionnee);
+
+                    // Mettre à jour l'adaptateur de RecyclerView avec la liste filtrée
+                    ReunionAdapter mAdapter = (ReunionAdapter) binding.recyclerview.getAdapter();
+                    mAdapter.updateList(reunionsFiltrees);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    // Ne rien faire si aucune salle n'est sélectionnée
+                }
+            });
+
+            // Créer un AlertDialog contenant le Spinner
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Filtrer par salle");
+            builder.setView(spinner);
+            builder.setPositiveButton("OK", null);
+            builder.setNegativeButton("Annuler", null);
+            builder.show();
+        }
+
+
         /*
         // Récupérer la liste des salles disponibles
         // j'arrive pas à recuperer la salle de ma fausse bdd
@@ -113,13 +159,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Appliquer le filtre par salle
                 List<Reunion> reunionsFiltrees = Injection.getReunionApiService().getReunionsFilteredBySalle(salleSelectionnee);
                 // recuperer la liste avec l'update effectué
-                ReunionAdapter.updateList(reunionsFiltrees);
+                ReunionAdapter adapter = new ReunionAdapter(new ArrayList<>());
+                adapter.updateList(reunionsFiltrees);
             }
         });
         builder.show();
         */
-
-    }
 
 
     private void dateDialog() {
@@ -135,7 +180,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, dayOfMonth);
-                // pour la clear ?
                 mReunionArrayList.clear();
                 mReunionArrayList.addAll(mReunionApiService.getReunionsFilteredByDate(cal.getTime()));
                 binding.recyclerview.getAdapter().notifyDataSetChanged();
