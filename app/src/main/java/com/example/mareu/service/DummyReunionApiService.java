@@ -8,9 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Imitation d un Api
+ * Fake Api
  */
-
 public class DummyReunionApiService implements ReunionApiService{
 
     private List<Reunion> reunion = DummyReunionGenerator.generateReunion();
@@ -39,6 +38,9 @@ public class DummyReunionApiService implements ReunionApiService{
         this.reunion.remove(reunion);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ArrayList<Reunion> getReunionsFilteredByDate(Date date) {
         ArrayList<Reunion> result = new ArrayList<>();
@@ -56,6 +58,9 @@ public class DummyReunionApiService implements ReunionApiService{
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Reunion> getReunionsFilteredBySalle(String salle) {
         List<Reunion> filteredReunions = new ArrayList<>();
@@ -66,6 +71,4 @@ public class DummyReunionApiService implements ReunionApiService{
         }
         return filteredReunions;
     }
-
-
 }

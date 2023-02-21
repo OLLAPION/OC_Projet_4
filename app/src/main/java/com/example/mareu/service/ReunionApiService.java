@@ -12,25 +12,32 @@ import java.util.List;
 public interface ReunionApiService {
 
     /**
-     * Obtenir toutes les reunions
+     * Get all meeting
      * @return {@link List}
      */
     List<Reunion> getReunion();
 
     /**
-     * Cree une reunion
+     * add meeting
      * @param reunion
      */
     void addReunion(Reunion reunion);
 
     /**
-     * supprime une reunion
+     * delete meeting
      * @param reunion
      */
     void deleteReunion(Reunion reunion);
 
-
+    /**
+     * get meeting to filter by date
+     * @param date
+     */
     ArrayList<Reunion> getReunionsFilteredByDate(Date date);
 
+    /**
+     * get meeting to filter by room
+     * @param participant
+     */
     List<Reunion> getReunionsFilteredBySalle(String participant);
 }

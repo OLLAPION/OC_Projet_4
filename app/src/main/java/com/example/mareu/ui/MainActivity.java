@@ -1,16 +1,12 @@
 package com.example.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -25,7 +21,6 @@ import com.example.mareu.databinding.ActivityMainBinding;
 import com.example.mareu.di.Injection;
 import com.example.mareu.model.Reunion;
 import com.example.mareu.repository.ReunionRepository;
-import com.example.mareu.service.ReunionApiService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,8 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ActivityMainBinding binding;
     private List<Reunion> mReunionArrayList = new ArrayList<>();
-    private final ReunionApiService mReunionApiService = Injection.getReunionApiService();
-    private List<String> salleList;
+    private final ReunionRepository mReunionRepository = Injection.getReunionRepository();
 
 
     private void initUI() {
@@ -57,12 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ReunionAdapter mAdapter = new ReunionAdapter(mReunionArrayList);
         binding.recyclerview.setAdapter(mAdapter);
-        /*
-        // Set CustomAdapter as the adapter for RecyclerView.
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(binding.recyclerview.getContext(),
-                layoutManager.getOrientation());
-        binding.recyclerview.addItemDecoration(dividerItemDecoration);
-        */
     }
 
     @Override
@@ -79,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dateDialog();
                 return true;
             case R.id.filter_salle:
-                salleDialog();
+                roomDialog();
                 return true;
             case R.id.filter_reset:
                 resetFilter();
@@ -91,45 +79,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void resetFilter() {
         mReunionArrayList.clear();
-        mReunionArrayList.addAll(mReunionApiService.getReunion());
+        mReunionArrayList.addAll(mReunionRepository.getReunion());
         binding.recyclerview.getAdapter().notifyDataSetChanged();
     }
 
-    private void salleDialog() {
+    private void roomDialog() {
 
-            // Créer un Spinner pour la sélection de la salle
+            // Je fais un Spinner pour la sélection de la salle
             Spinner spinner = new Spinner(this);
 
-            // Créer une liste de salles
+            // Je fais une liste de salles
             List<String> salles = Arrays.asList("Salle_01", "Salle_02", "Salle_03", "Salle_04", "Salle_05", "Salle_06", "Salle_07", "Salle_08", "Salle_09", "Salle_10");
 
-            // Créer un adaptateur pour le Spinner
+            // Je fais un adaptateur pour le Spinner
             ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, salles);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
 
-            // Ajouter un écouteur d'événements sur le Spinner
+            // J'ajoute un écouteur d'événements sur le Spinner
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // Récupérer la salle sélectionnée
+                    // Je recupere la salle sélectionnée
                     String salleSelectionnee = (String) parent.getItemAtPosition(position);
 
-                    // Filtrer la liste des réunions par salle
-                    List<Reunion> reunionsFiltrees = mReunionApiService.getReunionsFilteredBySalle(salleSelectionnee);
+                    // Je filtre la liste des réunions par salle
+                    List<Reunion> reunionsFiltrees = mReunionRepository.getReunionsFilteredBySalle(salleSelectionnee);
 
-                    // Mettre à jour l'adaptateur de RecyclerView avec la liste filtrée
+
+                    // Je met à jour l'adaptateur de RecyclerView avec la liste filtrée
                     ReunionAdapter mAdapter = (ReunionAdapter) binding.recyclerview.getAdapter();
                     mAdapter.updateList(reunionsFiltrees);
                 }
 
                 @Override
                 public void onNothingSelected(AdapterView<?> parent) {
-                    // Ne rien faire si aucune salle n'est sélectionnée
+                    // Si aucune salle selectionné ne rien faire
                 }
             });
 
-            // Créer un AlertDialog contenant le Spinner
+            // Je fais un AlertDialog contenant le Spinner
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Filtrer par salle");
             builder.setView(spinner);
@@ -139,38 +128,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-        /*
-        // Récupérer la liste des salles disponibles
-        // j'arrive pas à recuperer la salle de ma fausse bdd
-        List<String> salles = Injection.getNewInstanceApiService().getReunionSalle();
-
-        // Créer un tableau de chaînes à partir de la liste des salles
-        String[] sallesArray = salles.toArray(new String[0]);
-
-        // Créer la boîte de dialogue
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Sélectionner une salle");
-        builder.setItems(sallesArray, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                // Récupérer la salle sélectionnée
-                String salleSelectionnee = salles.get(which);
-
-                // Appliquer le filtre par salle
-                List<Reunion> reunionsFiltrees = Injection.getReunionApiService().getReunionsFilteredBySalle(salleSelectionnee);
-                // recuperer la liste avec l'update effectué
-                ReunionAdapter adapter = new ReunionAdapter(new ArrayList<>());
-                adapter.updateList(reunionsFiltrees);
-            }
-        });
-        builder.show();
-        */
-
-
     private void dateDialog() {
         int selectedYear = 2023;
-        int selectedMonth = 1;
-        int selectedDayOfMonth = 15;
+        int selectedMonth = 2;
+        int selectedDayOfMonth = 1;
 
 // Date Select Listener.
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -181,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, dayOfMonth);
                 mReunionArrayList.clear();
-                mReunionArrayList.addAll(mReunionApiService.getReunionsFilteredByDate(cal.getTime()));
+                mReunionArrayList.addAll(mReunionRepository.getReunionsFilteredByDate(cal.getTime()));
                 binding.recyclerview.getAdapter().notifyDataSetChanged();
             }
         };
@@ -196,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initData() {
-        mReunionArrayList = new ArrayList<>(mReunionApiService.getReunion());
+        mReunionArrayList = new ArrayList<>(mReunionRepository.getReunion());
     }
 
 
@@ -224,5 +185,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(this, AddReunionActivity.class));
         }
     }
-
 }

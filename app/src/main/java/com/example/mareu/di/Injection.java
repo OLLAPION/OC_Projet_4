@@ -5,40 +5,27 @@ import com.example.mareu.service.DummyReunionApiService;
 import com.example.mareu.service.ReunionApiService;
 
 /**
- * Injection de dependance pour aller chercher une instance des services
+ * Dependency injection to get an instance from the ReunionRepository
  */
 public class Injection {
 
 
      /**
-     *cherche toujours une nouvelle instance de @{@link ReunionRepository}. Utilisable pour les tests.
+     *Get a new instance on @{@link ReunionRepository}.
      *@return
      */
     public static ReunionRepository createReunionRepository() {
-        // ne pas retourner une nouvelle reunion
         return new ReunionRepository(new DummyReunionApiService());
     }
 
-    // separation entre l'apiService et le repository
-
-    private static ReunionApiService service = new DummyReunionApiService();
+    private static ReunionRepository service = new ReunionRepository(new DummyReunionApiService());
 
     /**
-     * Get an instance on @{@link ReunionApiService}
+     * Get an instance on @{@link ReunionRepository}
      * @return
      */
-    public static ReunionApiService getReunionApiService() {
+    public static ReunionRepository getReunionRepository() {
         return service;
     }
-
-    /**
-     * Get always a new instance on @{@link ReunionApiService}. Useful for tests, so we ensure the context is clean.
-     * @return
-     */
-    public static ReunionApiService getNewInstanceApiService() {
-        return new DummyReunionApiService();
-    }
-
-
 
 }

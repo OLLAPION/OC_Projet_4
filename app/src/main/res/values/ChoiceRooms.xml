@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string-array name="choiceRooms" android:textSize="32dp">
+        <item>Choisir une Salle de reunion</item>
+        <item>Salle_01</item>
+        <item>Salle_02</item>
+        <item>Salle_03</item>
+        <item>Salle_04</item>
+        <item>Salle_05</item>
+        <item>Salle_06</item>
+        <item>Salle_07</item>
+        <item>Salle_08</item>
+        <item>Salle_09</item>
+        <item>Salle_10</item>
+    </string-array>
+</resources>

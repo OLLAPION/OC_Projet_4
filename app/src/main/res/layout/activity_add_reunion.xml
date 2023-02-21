@@ -1,168 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.AddReunionActivity">
 
-    <Spinner
-        android:id="@+id/choixSalle"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="wrap_content">
 
-    <Spinner
-        android:layout_width="wrap_content"
-    android:layout_height="30dp"
-    android:layout_marginBottom="30dp"
-    android:id="@+id/spinner"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-        app:layout_constraintStart_toStartOf="@id/choixSalle"
-        app:layout_constraintTop_toTopOf="@id/choixSalle"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <TextView
-        android:id="@+id/textLieu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Choix de la salle : "
-        app:layout_constraintStart_toStartOf="@id/choixSalle"
-        app:layout_constraintTop_toTopOf="@id/choixSalle"
-        tools:text="Choix de la salle: " />
+            <Spinner
+                android:id="@+id/meetingRooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"/>
 
-    <EditText
-        android:id="@+id/recuperationLieu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/textLieu"
-        app:layout_constraintTop_toTopOf="@id/textLieu"
-        android:hint="Exemple : Salle_01"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meetingDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
+                android:hint="Jour de la reunion" />
 
-    <TextView
-        android:id="@+id/textJour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Jour de la reunion : "
-        app:layout_constraintStart_toStartOf="@id/recuperationLieu"
-        app:layout_constraintTop_toTopOf="@id/recuperationLieu"
-        tools:text="Jour de la reunion : " />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meetingStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
+                android:hint="Debut de la reunion" />
 
-    <EditText
-        android:id="@+id/recuperationJour"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/textJour"
-        app:layout_constraintTop_toTopOf="@id/textJour"
-        android:hint="Exemple : 25/02/2023"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meetingEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
+                android:hint="Fin de la reunion" />
 
-    <TextView
-        android:id="@+id/textHeureDebut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Heure du debut : "
-        app:layout_constraintStart_toStartOf="@id/recuperationJour"
-        app:layout_constraintTop_toTopOf="@id/recuperationJour"
-        tools:text="Heure du debut : " />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meetingSubject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
+                android:hint="Sujet de la reunion" />
 
-    <EditText
-        android:id="@+id/recuperationHeureDebut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/textHeureDebut"
-        app:layout_constraintTop_toTopOf="@id/textHeureDebut"
-        android:hint="Exemple : 10h30"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/meetingParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
+                android:hint="Participant à la reunion" />
 
-    <TextView
-        android:id="@+id/textHeureFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:layout_marginLeft="100dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Heure de Fin : "
-        app:layout_constraintStart_toEndOf="@id/recuperationHeureDebut"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Heure de Fin : " />
+            <Button
+                android:id="@+id/buttonAddMeeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32dp"
+                android:layout_margin="20dp"
 
-    <EditText
-        android:id="@+id/recuperationHeureFin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/textHeureFin"
-        app:layout_constraintTop_toTopOf="@id/textHeureFin"
-        android:hint="Exemple : 10h30"/>
+                android:hint="Valider l'ajout d'une reunion"/>
 
-    <TextView
-        android:id="@+id/textSujet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="-140dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Sujet de la reunion : "
-        app:layout_constraintStart_toEndOf="@id/recuperationHeureDebut"
-        app:layout_constraintTop_toTopOf="@id/recuperationHeureDebut"
-        tools:text="Sujet de la reunion : " />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/recuperationSujet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Exemple : Sujet_1"
-        app:layout_constraintStart_toStartOf="@id/textSujet"
-        app:layout_constraintTop_toTopOf="@id/textSujet" />
-
-    <TextView
-        android:id="@+id/textParticipants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="-148dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:text="Adresse Mail des participants : "
-        app:layout_constraintStart_toEndOf="@id/recuperationSujet"
-        app:layout_constraintTop_toTopOf="@id/recuperationSujet"
-        tools:text="Adresse Mail des participants : " />
-
-    <EditText
-        android:id="@+id/recuperationParticipants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Exemple : exemple@domaine.fr"
-        app:layout_constraintStart_toStartOf="@id/textParticipants"
-        app:layout_constraintTop_toTopOf="@id/textParticipants" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:text="Valider la reservation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recuperationParticipants" />
+    </ScrollView>
 
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

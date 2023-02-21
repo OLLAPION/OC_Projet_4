@@ -4,30 +4,30 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * L objet modele representant une reunion
+ * model item meeting
  */
 public class Reunion {
 
 
-    /** Identifiant */
+    /** meeting Identifier */
     private Integer id;
 
-    /** Salle de reunion */
+    /** meeting room */
     private String reunionSalle;
 
-    /** L heure de debut de la reunion */
+    /** meeting start time */
     private String reunionDebut;
 
-    /** L heure de fin de la reunion */
+    /** meeting end time */
     private String reunionFin;
 
-    /** Sujet de la reunion */
+    /** meeting subject */
     private String reunionSujet;
 
-    /** Participant a la reunion */
+    /** meeting participant */
     private List<String> reunionParticipants;
 
-    /** Jour de la reunion */
+    /** meeting day */
     private Date mReunionDate;
 
 
@@ -99,7 +99,7 @@ public class Reunion {
     }
 
     /**
-     * Constructeur
+     * Constructor
      * @param id
      * @param reunionSalle
      * @param reunionDebut

@@ -4,9 +4,12 @@ import com.example.mareu.model.Reunion;
 import com.example.mareu.service.ReunionApiService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ReunionRepository {
+
+    // faire du java doc ?
 
     private final ReunionApiService reunionApiService;
 
@@ -24,5 +27,13 @@ public class ReunionRepository {
 
     public void deleteReunion(Reunion reunion) {
         reunionApiService.deleteReunion(reunion);
+    }
+
+    public ArrayList<Reunion> getReunionsFilteredByDate(Date date) {
+        return reunionApiService.getReunionsFilteredByDate(date);
+    }
+
+    public List<Reunion> getReunionsFilteredBySalle(String participant) {
+        return reunionApiService.getReunionsFilteredBySalle(participant);
     }
 }
