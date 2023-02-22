@@ -40,7 +40,7 @@ public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHold
         Reunion reunion = reunions.get(position);
         holder.displayReunion(reunion);
 
-        holder.binding.photo.setImageResource(getGoodPhoto(reunion.getReunionSalle()));
+        holder.binding.picture.setImageResource(getGoodPhoto(reunion.getReunionSalle()));
         holder.binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,9 +108,9 @@ public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHold
         public void displayReunion(Reunion reunion) {
             SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
 
-            binding.lieu.setText(reunion.getReunionSalle());
-            binding.heureCommencement.setText("-" + reunion.getReunionDebut() + "-");
-            binding.sujet.setText(reunion.getReunionSujet());
+            binding.room.setText(reunion.getReunionSalle());
+            binding.timeToStart.setText("-" + reunion.getReunionDebut() + "-");
+            binding.subject.setText(reunion.getReunionSujet());
             binding.date.setText(fmtOut.format(reunion.getReunionDate()));
 
             List<String> reunionParticipants = reunion.getReunionParticipants();
@@ -123,7 +123,7 @@ public class ReunionAdapter extends RecyclerView.Adapter<ReunionAdapter.ViewHold
             if (participants.endsWith(",")) {
                 participants = participants.substring(0, participants.length() - 1);
             }
-            binding.participant.setText(participants);
+            binding.participants.setText(participants);
         }
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".ui.MainActivity">
 
     <ImageView
-        android:id="@+id/photo"
+        android:id="@+id/picture"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="16dp"
@@ -16,30 +16,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/lieu"
+        android:id="@+id/room"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@id/photo"
-        app:layout_constraintTop_toTopOf="@id/photo"
+        app:layout_constraintStart_toEndOf="@id/picture"
+        app:layout_constraintTop_toTopOf="@id/picture"
         tools:text="Salle A" />
 
     <TextView
-        android:id="@+id/heureCommencement"
+        android:id="@+id/timeToStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:textStyle="bold"
         android:textSize="20dp"
-        app:layout_constraintStart_toEndOf="@id/lieu"
+        app:layout_constraintStart_toEndOf="@id/room"
         app:layout_constraintTop_toTopOf="parent"
         tools:text=" - 10h30 - " />
 
     <TextView
-        android:id="@+id/sujet"
+        android:id="@+id/subject"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,12 +47,12 @@
         android:textStyle="bold"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/heureCommencement"
-        app:layout_constraintTop_toTopOf="@id/heureCommencement"
+        app:layout_constraintStart_toEndOf="@id/timeToStart"
+        app:layout_constraintTop_toTopOf="@id/timeToStart"
         tools:text="Sujet" />
 
     <TextView
-        android:id="@+id/participant"
+        android:id="@+id/participants"
         android:layout_width="235dp"
         android:layout_height="19dp"
         android:layout_marginStart="8dp"
@@ -62,8 +62,8 @@
         android:lines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/photo"
-        app:layout_constraintTop_toBottomOf="@id/sujet"
+        app:layout_constraintStart_toEndOf="@id/picture"
+        app:layout_constraintTop_toBottomOf="@id/subject"
         tools:text="Adresse@mail.com" />
 
     <TextView
