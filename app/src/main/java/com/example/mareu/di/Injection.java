@@ -9,23 +9,26 @@ import com.example.mareu.service.ReunionApiService;
  */
 public class Injection {
 
+    private static ReunionRepository service;
 
-     /**
-     *Get a new instance on @{@link ReunionRepository}.
+    /**
+     * Get an instance of @{@link ReunionRepository}
+     *
+     * @return
+     */
+    public static ReunionRepository getReunionRepository() {
+        if (service == null) {
+            service = new ReunionRepository(new DummyReunionApiService());
+        }
+        return service;
+    }
+
+
+    /**
+     *Get a new instance on @{@link ReunionRepository} used only to test.
      *@return
      */
     public static ReunionRepository createReunionRepository() {
         return new ReunionRepository(new DummyReunionApiService());
     }
-
-    private static ReunionRepository service = new ReunionRepository(new DummyReunionApiService());
-
-    /**
-     * Get an instance on @{@link ReunionRepository}
-     * @return
-     */
-    public static ReunionRepository getReunionRepository() {
-        return service;
-    }
-
 }

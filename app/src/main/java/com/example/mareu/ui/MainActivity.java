@@ -176,12 +176,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setButton() {
-        binding.addReunion.setOnClickListener(this);
+        binding.addMeeting.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if (view == binding.addReunion) {
+        if (view == binding.addMeeting) {
             startActivity(new Intent(this, AddReunionActivity.class));
         }
     }

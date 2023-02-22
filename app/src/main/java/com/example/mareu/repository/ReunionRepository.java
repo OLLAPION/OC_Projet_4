@@ -9,13 +9,13 @@ import java.util.List;
 
 public class ReunionRepository {
 
-    // faire du java doc ?
 
     private final ReunionApiService reunionApiService;
 
     public ReunionRepository(ReunionApiService reunionApiService) {
         this.reunionApiService = reunionApiService;
     }
+
 
     public List<Reunion> getReunion() {
         return reunionApiService.getReunion();
