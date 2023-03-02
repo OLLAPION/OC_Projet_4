@@ -1,34 +1,33 @@
 package com.example.mareu.di;
 
-import com.example.mareu.repository.ReunionRepository;
-import com.example.mareu.service.DummyReunionApiService;
-import com.example.mareu.service.ReunionApiService;
+import com.example.mareu.repository.MeetingRepository;
+import com.example.mareu.service.DummyMeetingApiService;
 
 /**
- * Dependency injection to get an instance from the ReunionRepository
+ * Dependency injection to get an instance from the MeetingRepository
  */
 public class Injection {
 
-    private static ReunionRepository service;
+    private static MeetingRepository service;
 
     /**
-     * Get an instance of @{@link ReunionRepository}
-     *
-     * @return
+     * Return a singleton instance of @{@link MeetingRepository}
+     * used in the app and test instrumented
+     * @return an instance of MeetingRepository
      */
-    public static ReunionRepository getReunionRepository() {
+    public static MeetingRepository getMeetingRepository() {
         if (service == null) {
-            service = new ReunionRepository(new DummyReunionApiService());
+            service = new MeetingRepository(new DummyMeetingApiService());
         }
         return service;
     }
 
-
     /**
-     *Get a new instance on @{@link ReunionRepository} used only to test.
-     *@return
+     *Get a new instance on @{@link MeetingRepository}
+     * used only in the unit test.
+     *@return A new instance of the MeetingRepository
      */
-    public static ReunionRepository createReunionRepository() {
-        return new ReunionRepository(new DummyReunionApiService());
+    public static MeetingRepository createMeetingRepository() {
+        return new MeetingRepository(new DummyMeetingApiService());
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddReunionActivity">
+    tools:context=".ui.AddMeetingsActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -13,64 +13,64 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <Spinner
                 android:id="@+id/meetingRooms"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingDay"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-                android:hint="Jour de la reunion" />
+                android:hint="Jour de la reunion"
+                android:textSize="32dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingStart"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-                android:hint="Debut de la reunion" />
+                android:hint="Debut de la reunion"
+                android:textSize="32dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingEnd"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-                android:hint="Fin de la reunion" />
+                android:hint="Fin de la reunion"
+                android:textSize="32dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingSubject"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-                android:hint="Sujet de la reunion" />
+                android:hint="Sujet de la reunion"
+                android:textSize="32dp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingParticipants"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-                android:hint="Participant à la reunion" />
+                android:hint="Participant à la reunion"
+                android:textSize="32dp" />
 
             <Button
                 android:id="@+id/buttonAddMeeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="32dp"
                 android:layout_margin="20dp"
-
-                android:hint="Valider l'ajout d'une reunion"/>
+                android:hint="Valider l'ajout d'une reunion"
+                android:textSize="32dp"
+                style="@style/MyButtonStyle"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 

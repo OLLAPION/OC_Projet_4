@@ -1,43 +1,43 @@
 package com.example.mareu.service;
 
-import com.example.mareu.model.Reunion;
+import com.example.mareu.model.Meeting;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * API client de la reunion
+ * API client of meeting
  */
-public interface ReunionApiService {
+public interface MeetingApiService {
 
     /**
      * Get all meeting
      * @return {@link List}
      */
-    List<Reunion> getReunion();
+    List<Meeting> getMeetings();
 
     /**
      * add meeting
-     * @param reunion
+     * @param meeting
      */
-    void addReunion(Reunion reunion);
+    void addMeeting(Meeting meeting);
 
     /**
      * delete meeting
-     * @param reunion
+     * @param meeting
      */
-    void deleteReunion(Reunion reunion);
+    void deleteMeeting(Meeting meeting);
 
     /**
      * get meeting to filter by date
      * @param date
      */
-    ArrayList<Reunion> getReunionsFilteredByDate(Date date);
+    ArrayList<Meeting> getMeetingFilteredByDate(Date date);
 
     /**
      * get meeting to filter by room
      * @param participant
      */
-    List<Reunion> getReunionsFilteredBySalle(String participant);
+    List<Meeting> getMeetingFilteredBySalle(String participant);
 }

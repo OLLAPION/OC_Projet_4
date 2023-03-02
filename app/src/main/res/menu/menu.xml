@@ -4,7 +4,7 @@
     <item android:id="@+id/filter_date"
         android:title="Filtrer par date"
         app:showAsAction="never" />
-    <item android:id="@+id/filter_salle"
+    <item android:id="@+id/filter_rooms"
         android:title="Filtrer par salle"
         app:showAsAction="never"/>
     <item android:id="@+id/filter_reset"
