@@ -20,7 +20,12 @@
                 android:id="@+id/meetingRooms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"/>
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:contentDescription="@string/room_add_meeting_description"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingDay"
@@ -28,13 +33,23 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:hint="Jour de la reunion"
-                android:textSize="32dp" />
+                android:textSize="32dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:contentDescription="@string/date_add_meeting_description"/>
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/meetingStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:contentDescription="@string/timeToStart_add_meeting_description"
                 android:hint="Debut de la reunion"
                 android:textSize="32dp" />
 
@@ -43,6 +58,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:contentDescription="@string/timeToEnd_add_meeting_description"
                 android:hint="Fin de la reunion"
                 android:textSize="32dp" />
 
@@ -51,7 +71,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
                 android:hint="Sujet de la reunion"
+                android:contentDescription="@string/subject_add_meeting_description"
                 android:textSize="32dp" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,18 +84,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:contentDescription="@string/participants_add_meeting_description"
                 android:hint="Participant à la reunion"
                 android:textSize="32dp" />
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buttonAddMeeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:hint="Valider l'ajout d'une reunion"
                 android:textSize="32dp"
-                style="@style/MyButtonStyle"
-                android:textColor="@color/white"/>
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textFontWeight="700"
+                android:fontFamily="sans-serif"
+                android:backgroundTint="@color/grey"
+                android:textColorHint="@color/black"
+                android:textColor="@color/black"
+                android:contentDescription="@string/button_add_meeting_description"/>
 
         </LinearLayout>
 

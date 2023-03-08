@@ -33,6 +33,7 @@ android {
     }
 }
 
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.5.1'
@@ -41,20 +42,14 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation 'androidx.slidingpanelayout:slidingpanelayout:1.2.0'
 
-
-
-    // EVENT BUS
-    implementation 'org.greenrobot:eventbus:3.1.1'
-
     // UNIT TEST
     testImplementation 'junit:junit:4.13.2'
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
 
     // INSTRUMENTATION TEST
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test:rules:1.4.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
     androidTestImplementation 'org.hamcrest:hamcrest-library:2.2'}

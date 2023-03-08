@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">MaReu</string>
+
+    <string name="go_to_add_meeting_button_description">Appuyez sur ce bouton pour aller sur la page d\'ajout d\'une nouvelle reunion</string>
+
+    <string name="room_add_meeting_description">Selection de La salle où se passera la reunion</string>
+    <string name="timeToStart_add_meeting_description">Selection de l\'heure de commencement de la reunion</string>
+    <string name="timeToEnd_add_meeting_description">Selection de l\'heure de fin de la reunion</string>
+    <string name="subject_add_meeting_description">Inscrire Le sujet de la reunion</string>
+    <string name="participants_add_meeting_description">Inscrire les participants de la reunion</string>
+    <string name="date_add_meeting_description">Selection de La date de la reunion</string>
+    <string name="button_add_meeting_description">Appuyez sur ce bouton pour valider l\'ajout d\'une nouvelle reunion</string>
+
+    <string name="room_meeting_description">La salle où se passera la réunion</string>
+    <string name="timeToStart_meeting_description">L\'heure de commencement de la réunion</string>
+    <string name="subject_meeting_description">Le sujet de la réunion</string>
+    <string name="participants_meeting_description">Les participants de la réunion</string>
+    <string name="date_meeting_description">La date de la réunion</string>
+    <string name="delete_meeting_button_description">Appuyez sur ce bouton pour supprimer une réunion</string>
 </resources>

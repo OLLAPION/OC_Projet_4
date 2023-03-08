@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initData();
         initUI();
     }
 
@@ -114,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Private methods
     // **************************************************
     /**
-     * Initializes the user interface of the main activity.
+     * Initializes the interface of the main activity.
      * Inflates the layout using the generated binding class, sets the content view
      * and initializes the buttons and recycler view.
      */
@@ -165,7 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void roomDialog() {
         Spinner spinner = new Spinner(this);
-        List<String> salles = Arrays.asList("Salle_01", "Salle_02", "Salle_03", "Salle_04", "Salle_05", "Salle_06", "Salle_07", "Salle_08", "Salle_09", "Salle_10");
+        List<String> salles = Arrays.asList("Salle_01", "Salle_02", "Salle_03", "Salle_04", "Salle_05", "Salle_06",
+                "Salle_07", "Salle_08", "Salle_09", "Salle_10");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, salles);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -218,10 +218,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 dateSetListener, selectedYear, selectedMonth, selectedDayOfMonth);
 
         datePickerDialog.show();
-    }
-
-    /** Initializes the ArrayList with meetings retrieved from the MeetingRepository. */
-    private void initData() {
-        mMeetingArrayList = new ArrayList<>(mMeetingRepository.getMeetings());
     }
 }

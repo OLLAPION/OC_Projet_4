@@ -35,7 +35,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
     // **************************************************
     // Private methods
     // **************************************************
-    private int getGoodPhoto(String meetingRoom) {
+    private int getGoodColors(String meetingRoom) {
         switch (meetingRoom) {
             case "Salle_01" :
                 return R.drawable.green2_circle;
@@ -89,14 +89,13 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         Meeting meeting = mMeetings.get(position);
         holder.displayMeeting(meeting);
 
-        holder.binding.picture.setImageResource(getGoodPhoto(meeting.getMeetingRoom()));
+        holder.binding.picture.setImageResource(getGoodColors(meeting.getMeetingRoom()));
         holder.binding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteMeeting(holder.getBindingAdapterPosition());
             }
         });
-
     }
 
     /**

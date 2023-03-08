@@ -4,22 +4,33 @@ import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 
 import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.app.Dialog;
 import android.content.Context;
+import android.view.View;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.espresso.matcher.RootMatchers;
@@ -48,12 +59,15 @@ import com.example.mareu.di.Injection;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.repository.MeetingRepository;
 import com.example.mareu.ui.MainActivity;
+import com.example.mareu.ui.MeetingAdapter;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -83,21 +97,8 @@ public class MeetingRepositoryInstrumentedTest {
         assertEquals("com.example.mareu", appContext.getPackageName());
     }
 
-
     @Test
-    public void deleteMeetingWithSuccess() {
-        // faire un delete
-        List<Meeting> initialMeetings = meetingRepository.getMeetings();
-        Meeting meetingToDelete = initialMeetings.get(0);
-        meetingRepository.deleteMeeting(meetingToDelete);
-        List<Meeting> updatedMeetings = meetingRepository.getMeetings();
-        assertThat(updatedMeetings, not(hasItem(meetingToDelete)));
-    }
-
-
-
-    @Test
-    public void addMeetingWithSuccess() {
+    public void addMeetingWithSuccess() throws ParseException {
         onView(withId(R.id.add_meeting)).perform(click());
         onView(withText("Choisir une Salle de reunion")).perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Salle_01"))).perform(click());
@@ -116,7 +117,30 @@ public class MeetingRepositoryInstrumentedTest {
         assertEquals(Arrays.asList("participant4@gmail.com"), addedMeeting.getMeetingParticipants());
         assertEquals("14:30", addedMeeting.getMeetingStart());
         assertEquals("15:30", addedMeeting.getMeetingEnd());
-        assertEquals(new Date(1672704000000L), addedMeeting.getMeetingDate());
+        String dateString = "03/01/2023";
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = format.parse(dateString);
+        assertEquals(date, addedMeeting.getMeetingDate());
+    }
+
+    @Test
+    public void deleteMeetingWithSuccess() {
+        onView(withId(R.id.add_meeting)).perform(click());
+        onView(withText("Choisir une Salle de reunion")).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Salle_05"))).perform(click());
+        onView(withId(R.id.meetingDay)).perform(typeText("03/01/2023"), closeSoftKeyboard());
+        onView(withId(R.id.meetingStart)).perform(typeText("15:00"), closeSoftKeyboard());
+        onView(withId(R.id.meetingEnd)).perform(typeText("18:00"), closeSoftKeyboard());
+        onView(withId(R.id.meetingSubject)).perform(typeText("Projet_04"), closeSoftKeyboard());
+        onView(withId(R.id.meetingParticipants)).perform(typeText("email11@gmail.com"), closeSoftKeyboard());
+        onView(withId(R.id.buttonAddMeeting)).perform(click());
+
+        List<Meeting> meetingsBeforeDelete = meetingRepository.getMeetings();
+        Meeting newMeeting = meetingsBeforeDelete.get(meetingsBeforeDelete.size() - 1);
+        meetingRepository.deleteMeeting(newMeeting);
+        List<Meeting> meetingsAfterDelete = meetingRepository.getMeetings();
+
+        assertNotEquals(meetingsBeforeDelete.size() -1, meetingsAfterDelete.size());
     }
 
 
