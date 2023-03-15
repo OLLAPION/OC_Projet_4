@@ -2,6 +2,7 @@ package com.example.mareu.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Add a meeting in this project.
@@ -35,7 +37,6 @@ public class AddMeetingsActivity extends AppCompatActivity implements  View.OnCl
     // **************************************************
     private ActivityAddMeetingsBinding binding;
     private String selectedRoom;
-    private DatePickerDialog datePickerDialog;
 
     // **************************************************
     // Constants
@@ -125,7 +126,7 @@ public class AddMeetingsActivity extends AppCompatActivity implements  View.OnCl
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
 
-        datePickerDialog = new DatePickerDialog(this, (view, yearSelected, monthOfYear, dayOfMonth) -> {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, yearSelected, monthOfYear, dayOfMonth) -> {
             String date = dayOfMonth + "/" + (monthOfYear + 1) + "/" + yearSelected;
             binding.meetingDay.setText(date);
         }, year, month, day);
@@ -144,7 +145,7 @@ public class AddMeetingsActivity extends AppCompatActivity implements  View.OnCl
         int minute = cldr.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minuteOfDay) -> {
-            String time = String.format("%02d:%02d", hourOfDay, minuteOfDay);
+            @SuppressLint("DefaultLocale") String time = String.format("%02d:%02d", hourOfDay, minuteOfDay);
             editText.setText(time);
         }, hour, minute, true);
         timePickerDialog.show();
@@ -188,39 +189,46 @@ public class AddMeetingsActivity extends AppCompatActivity implements  View.OnCl
      @throws ParseException if there is an error parsing the meeting date
      */
     private void onSubmit() throws ParseException {
+        @SuppressLint("SimpleDateFormat")
         SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
-        List<String> listParticipants = new ArrayList<>();
 
-        String meetingStart = binding.meetingStart.getText().toString();
-        String meetingEnd = binding.meetingEnd.getText().toString();
-        String meetingSubject = binding.meetingSubject.getText().toString();
-        String meetingDate = binding.meetingDay.getText().toString();
+        String meetingStart = Objects.requireNonNull(binding.meetingStart.getText()).toString();
+        String meetingEnd = Objects.requireNonNull(binding.meetingEnd.getText()).toString();
+        String meetingSubject = Objects.requireNonNull(binding.meetingSubject.getText()).toString();
+        String meetingDate = Objects.requireNonNull(binding.meetingDay.getText()).toString();
         Date dateAuFormat = fmtOut.parse(meetingDate);
-        String meetingParticipant = binding.meetingParticipants.getText().toString().trim();
-        listParticipants.add(meetingParticipant);
+
+        String[] participants = Objects.requireNonNull(binding.meetingParticipants.getText()).toString().split(";");
+        List<String> meetingEmailList = new ArrayList<>();
+        for(String participant : participants) {
+            String email = participant.trim();
+            if(email.contains("@")) { // Vérification sommaire de l'adresse e-mail
+                meetingEmailList.add(email);
+            }
+        }
 
         if (meetingDate.isEmpty()) {
-            binding.meetingDay.setError("Choisissez un jour");
+            binding.meetingDay.setError(getString(R.string.chooce_day));
             return;
         }
         if (meetingStart.isEmpty()) {
-            binding.meetingStart.setError("Choisissez une heure de commencement");
+            binding.meetingStart.setError(getString(R.string.start_time));
             return;
         }
         if (meetingEnd.isEmpty()) {
-            binding.meetingEnd.setError("Choisissez une heure de fin");
+            binding.meetingEnd.setError(getString(R.string.end_time));
             return;
         }
         if (meetingSubject.isEmpty()) {
-            binding.meetingSubject.setError("Choisissez un sujet");
+            binding.meetingSubject.setError(getString(R.string.subject));
             return;
         }
-        if (meetingParticipant.isEmpty()) {
-            binding.meetingParticipants.setError("Ajoutez au moins deux participants");
+        if (meetingEmailList.isEmpty()) {
+            binding.meetingParticipants.setError(getString(R.string.participants));
             return;
         }
 
-        mMeetingRepository.addMeeting(new Meeting(selectedRoom, meetingStart, meetingEnd, meetingSubject, listParticipants, dateAuFormat));
+        mMeetingRepository.addMeeting(new Meeting(selectedRoom, meetingStart, meetingEnd, meetingSubject, meetingEmailList, dateAuFormat));
         Toast.makeText(this, "Reunion reservé !", Toast.LENGTH_LONG).show();
         finish();
     }

@@ -1,5 +1,6 @@
 package com.example.mareu.ui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mareu.R;
 import com.example.mareu.databinding.ItemMeetingBinding;
+import com.example.mareu.di.Injection;
 import com.example.mareu.model.Meeting;
+import com.example.mareu.repository.MeetingRepository;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -21,9 +24,17 @@ import java.util.List;
 public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
 
     // **************************************************
-    // Fields
+    // Constants
     // **************************************************
-    private List<Meeting> mMeetings;
+    private final List<Meeting> mMeetings;
+
+    /** Contains the only one instence of the MeetingRepository */
+    private final MeetingRepository mMeetingRepository = Injection.getMeetingRepository();
+
+    // **************************************************
+    // Field
+    // **************************************************
+    List<Meeting> meetings = mMeetingRepository.getMeetings();
     /**
      * Constructs a MeetingAdapter with the given list of meetings.
      * @param meetingArrayList The list of meetings to display.
@@ -114,6 +125,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
     public void deleteMeeting(int position) {
         mMeetings.remove(position);
         notifyItemRemoved(position);
+        mMeetingRepository.deleteMeeting(meetings.get(position));
         notifyItemRangeChanged(position, mMeetings.size());
     }
 
@@ -131,7 +143,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
      * ViewHolder for a meeting item in the list.
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemMeetingBinding binding;
+        private final ItemMeetingBinding binding;
 
         /**
          * Constructs a new ViewHolder for a meeting item view.
@@ -147,10 +159,11 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
          * @param meeting The meeting to display.
          */
         public void displayMeeting(Meeting meeting) {
-            SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("dd/MM/yyyy");
 
             binding.room.setText(meeting.getMeetingRoom());
-            binding.timeToStart.setText("-" + meeting.getMeetingStart() + "-");
+            binding.timeToStart.setText(String.format("-%s-", meeting.getMeetingStart()));
+
             binding.subject.setText(meeting.getMeetingSubject());
             binding.date.setText(fmtOut.format(meeting.getMeetingDate()));
 
