@@ -17,4 +17,9 @@
     <string name="participants_meeting_description">Les participants de la réunion</string>
     <string name="date_meeting_description">La date de la réunion</string>
     <string name="delete_meeting_button_description">Appuyez sur ce bouton pour supprimer une réunion</string>
+    <string name="chooce_day">Choisissez un jour</string>
+    <string name="start_time">Choisissez une heure de commencement</string>
+    <string name="end_time">Choisissez une heure de fin</string>
+    <string name="subject">Choisissez un sujet</string>
+    <string name="participants">Ajoutez au moins deux participants</string>
 </resources>
